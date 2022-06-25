@@ -13,7 +13,7 @@ class StoreTeacherRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,7 +26,8 @@ class StoreTeacherRequest extends FormRequest
         return [
             'name' => 'required',
             'birth_date' => ['required', 'date'],
-            'join_date' => 'date',
+            'email' => ['required', 'email'],
+            'password' => ['required', 'confirmed'],
         ];
     }
 }

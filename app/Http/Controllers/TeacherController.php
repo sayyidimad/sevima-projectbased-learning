@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTeacherRequest;
 use App\Http\Requests\UpdateTeacherRequest;
+
 use App\Models\Teacher;
+use App\Models\User;
 
 class TeacherController extends Controller
 {
@@ -25,7 +27,7 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        //
+        return view('teacher.create');
     }
 
     /**
@@ -36,7 +38,15 @@ class TeacherController extends Controller
      */
     public function store(StoreTeacherRequest $request)
     {
-        //
+        $request['password'] = bcrypt($request['password']);
+        $request['role'] = User::TEACHER;
+        $user = User::create($request->except('birth_date'));
+
+        $request['join_date'] = now();
+        $request['user_id'] = $user->id;
+        $teacher = Teacher::create($request->only(['name', 'birth_date', 'join_date', 'user_id']));
+
+        return redirect()->route('teacher.index')->withSuccess('Guru berhasil ditambahkan');
     }
 
     /**
@@ -58,7 +68,7 @@ class TeacherController extends Controller
      */
     public function edit(Teacher $teacher)
     {
-        //
+        return view('teacher.edit', ['teacher' => $teacher]);
     }
 
     /**
@@ -70,7 +80,16 @@ class TeacherController extends Controller
      */
     public function update(UpdateTeacherRequest $request, Teacher $teacher)
     {
-        //
+        $user = $teacher->user;
+        if ($request['password'] != null) {
+            $request['password'] = bcrypt($request['password']);
+            $user->update($request->except('birth_date'));
+        }
+        $user->update($request->only(['name', 'email']));
+
+        $teacher->update($request->only(['name', 'birth_date']));
+
+        return redirect()->route('teacher.index')->withSuccess('Guru berhasil diubah');
     }
 
     /**
@@ -81,6 +100,11 @@ class TeacherController extends Controller
      */
     public function destroy(Teacher $teacher)
     {
-        //
+        $user = $teacher->user;
+        $user->delete();
+
+        $teacher->delete();
+
+        return redirect()->route('teacher.index')->withSuccess('Guru berhasil dihapus');
     }
 }

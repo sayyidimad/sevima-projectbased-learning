@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -17,10 +18,12 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
+        // Admin
         $admin = User::factory()->create([
             'role' => User::ADMIN,
         ]);
 
+        // Teacher
         $teacher = User::factory()->create([
             'role' => User::TEACHER,
         ]);
@@ -29,8 +32,14 @@ class DatabaseSeeder extends Seeder
             'user_id' => $teacher->id,
         ]);
 
-        // $student = User::factory()->create([
-        //     'role' => User::STUDENT,
-        // ]);
+        // Student
+        $student = User::factory()->create([
+            'role' => User::STUDENT,
+        ]);
+
+        \App\Models\Student::factory()->create([
+            'user_id' => $teacher->id,
+        ]);
+
     }
 }

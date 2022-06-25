@@ -18,7 +18,7 @@ class TeacherPolicy
      */
     public function viewAny(User $user)
     {
-        return in_array($user->role, [User::ADMIN, User::TEACHER]);
+        return $user->role == User::ADMIN;
     }
 
     /**
@@ -30,7 +30,8 @@ class TeacherPolicy
      */
     public function view(User $user, Teacher $teacher)
     {
-        return $user->id == $teacher->user_id || in_array($user->role, [User::ADMIN, User::TEACHER]);
+        return ($user->id == $teacher->user_id) || $user->role == User::ADMIN;
+
     }
 
     /**
@@ -41,7 +42,7 @@ class TeacherPolicy
      */
     public function create(User $user)
     {
-        return in_array($user->role, [User::ADMIN, User::TEACHER]);
+        return $user->role == User::ADMIN;
     }
 
     /**
@@ -53,7 +54,7 @@ class TeacherPolicy
      */
     public function update(User $user, Teacher $teacher)
     {
-        return $user->id == $teacher->user_id || in_array($user->role, [User::ADMIN, User::TEACHER]);
+        return ($user->id == $teacher->user_id) || $user->role == User::ADMIN;
     }
 
     /**
@@ -65,7 +66,7 @@ class TeacherPolicy
      */
     public function delete(User $user, Teacher $teacher)
     {
-        return $user->id == $teacher->user_id || in_array($user->role, [User::ADMIN, User::TEACHER]);
+        return ($user->id == $teacher->user_id) || $user->role == User::ADMIN;
     }
 
     /**
@@ -77,7 +78,7 @@ class TeacherPolicy
      */
     public function restore(User $user, Teacher $teacher)
     {
-        return $user->id == $teacher->user_id || in_array($user->role, [User::ADMIN, User::TEACHER]);
+        return ($user->id == $teacher->user_id) || $user->role == User::ADMIN;
     }
 
     /**
@@ -89,6 +90,6 @@ class TeacherPolicy
      */
     public function forceDelete(User $user, Teacher $teacher)
     {
-        return $user->id == $teacher->user_id || in_array($user->role, [User::ADMIN, User::TEACHER]);
+        return ($user->id == $teacher->user_id) || $user->role == User::ADMIN;
     }
 }
