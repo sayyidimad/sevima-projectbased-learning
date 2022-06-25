@@ -3,7 +3,8 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Dashboard\CourseController;
 use App\Http\Controllers\Dashboard\EventController;
-use App\Http\Controllers\Dashboard\StudentController;
+use App\Http\Controllers\Dashboard\StudentController as StudentBack;
+use App\Http\Controllers\StudentController as StudentFront;
 use App\Http\Controllers\Dashboard\TeacherController;
 
 use Illuminate\Support\Facades\Route;
@@ -20,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware(['auth'])->prefix('dashboard')->group(function () {
-    Route::get('/', function () {
+    Route::get('/home', function () {
         return view('welcome', ['menu' => 'home']);
     })->middleware('auth')->name('home');
 
@@ -34,7 +35,7 @@ Route::middleware(['auth'])->prefix('dashboard')->group(function () {
         Route::delete('/{teacher}/delete', 'destroy')->name('delete');
     });
 
-    Route::controller(StudentController::class)->prefix('students')->name('student.')->group(function () {
+    Route::controller(StudentBack::class)->prefix('students')->name('student.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create');
         Route::post('/store', 'store')->name('store');
@@ -63,6 +64,15 @@ Route::middleware(['auth'])->prefix('dashboard')->group(function () {
         Route::post('/{event}/update', 'update')->name('update');
         Route::delete('/{event}/delete', 'destroy')->name('delete');
     });
+});
+
+Route::controller(StudentFront::class)->prefix('students/')->name('student.')->group(function () {
+    Route::get('/', 'course')->name('course');
+    Route::get('/{course}', 'event')->name('event');
+    Route::get('/{event}/single', 'single')->name('single');
+    // Route::get('/{event}/edit', 'edit')->name('edit');
+    // Route::post('/{event}/update', 'update')->name('update');
+    // Route::delete('/{event}/delete', 'destroy')->name('delete');
 });
 
 Route::get('/register', [AuthController::class, 'register'])->middleware(['guest'])->name('register');

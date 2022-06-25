@@ -1,38 +1,33 @@
-@extends('layouts.dashboard')
+@extends('layouts.front')
 
-@section('title', 'Siswa')
+@section('title', 'Pelajaran')
 
 @section('content')
-    @include('partials._breadcrumb', ['secondText' => 'Siswa'])
+    @include('partials._breadcrumb', ['secondText' => 'Pelajaran'])
 
-    {{-- <button type="button" class="btn btn-primary">Primary</button> --}}
-    <a href="{{ route('student.create') }}" class="btn btn-primary mb-3"><i class='bx bx-plus'></i> Tambahkan</a>
+    {{-- <a href="{{ route('course.create') }}" class="btn btn-primary mb-3"><i class='bx bx-plus'></i> Tambahkan</a> --}}
 
     <!-- Hoverable Table rows -->
     <div class="card">
-        <h5 class="card-header">Siswa</h5>
+        <h5 class="card-header">Pelajaran</h5>
         <div class="text-nowrap">
             <table class="table table-hover">
                 <thead>
                     <tr>
                         <th>Nama</th>
-                        <th>Email</th>
-                        <th>Tanggal Lahir</th>
-                        <th>Tanggal bergabung</th>
-                        <th>Actions</th>
+                        <th>Kategori</th>
+                        <th>Tanggal dimulai</th>
+                        <th>Tanggal berakhir</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
-                    @foreach ($students as $student)
+                    @foreach ($courses as $course)
                         <tr>
-                            <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{ $student->name }}</strong>
-                            </td>
-                            <td>{{ $student->user->email }}</td>
-                            <td>{{ $student->birth_date }}</td>
-                            <td>{{ $student->join_date }}</td>
-                            <td>
-                                <x-table-action :data="$student" :model="'student'" :withDetail="false" />
-                            </td>
+                            <td><a href="{{ route('student.event', $course) }}">{{ $course->name }}</a></td>
+                            <td><i class="fab fa-angular fa-lg text-danger"></i>
+                                <strong>{{ $course->category }}</strong></td>
+                            <td>{{ $course->start_date }}</td>
+                            <td>{{ $course->end_date }}</td>
                         </tr>
                     @endforeach
                 </tbody>

@@ -18,7 +18,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        return view('course.index', ['menu' => 'course', 'courses' => Course::all()]);
+        return view('dashboard.course.index', ['menu' => 'course', 'courses' => Course::all()]);
     }
 
     /**
@@ -28,7 +28,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        return view('course.create', ['menu' => 'course', 'teachers' => Teacher::all()]);
+        return view('dashboard.course.create', ['menu' => 'course', 'teachers' => Teacher::all()]);
     }
 
     /**
@@ -56,7 +56,7 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-        return view('course.show', ['menu' => 'course', 'course' => $course]);
+        return view('dashboard.course.show', ['menu' => 'course', 'course' => $course]);
     }
 
     /**
@@ -67,7 +67,7 @@ class CourseController extends Controller
      */
     public function edit(Course $course)
     {
-        return view('course.edit', ['menu' => 'course', 'course' => $course, 'teachers' => Teacher::all()]);
+        return view('dashboard.course.edit', ['menu' => 'course', 'course' => $course, 'teachers' => Teacher::all()]);
     }
 
     /**

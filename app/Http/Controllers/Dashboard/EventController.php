@@ -67,7 +67,7 @@ class EventController extends Controller
      */
     public function edit(Course $course, Event $event)
     {
-        return view('event.edit', ['menu' => 'course', 'course' => $course, 'event' => $event]);
+        return view('dashboard.event.edit', ['menu' => 'course', 'course' => $course, 'event' => $event]);
     }
 
     /**

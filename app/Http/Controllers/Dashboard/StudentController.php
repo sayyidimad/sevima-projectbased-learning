@@ -18,7 +18,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        return view('student.index', ['menu' => 'student', 'students' => Student::all()]);
+        return view('dashboard.student.index', ['menu' => 'student', 'students' => Student::all()]);
     }
 
     /**
@@ -28,7 +28,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('student.create', ['menu' => 'student']);
+        return view('dashboard.student.create', ['menu' => 'student']);
     }
 
     /**
@@ -70,7 +70,7 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        return view('student.edit', ['menu' => 'student', 'student' => $student]);
+        return view('dashboard.student.edit', ['menu' => 'student', 'student' => $student]);
     }
 
     /**

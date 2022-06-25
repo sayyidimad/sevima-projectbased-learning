@@ -18,7 +18,7 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        return view('teacher.index', ['menu' => 'teacher', 'teachers' => Teacher::all()]);
+        return view('dashboard.teacher.index', ['menu' => 'teacher', 'teachers' => Teacher::all()]);
     }
 
     /**
@@ -28,7 +28,7 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        return view('teacher.create', ['menu' => 'teacher']);
+        return view('dashboard.teacher.create', ['menu' => 'teacher']);
     }
 
     /**
@@ -70,7 +70,7 @@ class TeacherController extends Controller
      */
     public function edit(Teacher $teacher)
     {
-        return view('teacher.edit', ['menu' => 'teacher', 'teacher' => $teacher]);
+        return view('dashboard.teacher.edit', ['menu' => 'teacher', 'teacher' => $teacher]);
     }
 
     /**
