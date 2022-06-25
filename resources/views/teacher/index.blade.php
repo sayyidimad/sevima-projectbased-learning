@@ -31,7 +31,7 @@
                             <td>{{ $teacher->birth_date }}</td>
                             <td>{{ $teacher->join_date }}</td>
                             <td>
-                                <x-table-action :data="$teacher" :model="'teacher'" />
+                                <x-table-action :data="$teacher" :model="'teacher'" :withDetail="false" />
                             </td>
                         </tr>
                     @endforeach

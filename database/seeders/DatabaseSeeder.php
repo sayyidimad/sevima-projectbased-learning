@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Event;
 use App\Models\User;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -35,6 +36,13 @@ class DatabaseSeeder extends Seeder
         // Course
         $course = \App\Models\Course::factory()->create([
             'teacher_id' => $teacher->id,
+        ]);
+
+        // Event
+        $event = Event::factory()->create([
+            'course_id' => $course->id,
+            'type' => Event::VIDEO,
+            'video' => 'https://www.youtube.com/watch?v=ImtZ5yENzgE',
         ]);
 
         // Student

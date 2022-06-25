@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 
@@ -49,4 +50,14 @@ Route::controller(CourseController::class)->prefix('courses')->name('course.')->
     Route::get('/{course}/edit', 'edit')->name('edit');
     Route::post('/{course}/update', 'update')->name('update');
     Route::delete('/{course}/delete', 'destroy')->name('delete');
+});
+
+Route::controller(EventController::class)->prefix('events/{course}')->name('event.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/{event}', 'show')->name('show');
+    Route::get('/{event}/edit', 'edit')->name('edit');
+    Route::post('/{event}/update', 'update')->name('update');
+    Route::delete('/{event}/delete', 'destroy')->name('delete');
 });
