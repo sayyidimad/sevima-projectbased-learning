@@ -19,27 +19,31 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         // Admin
-        $admin = User::factory()->create([
+        $admin_user = User::factory()->create([
             'role' => User::ADMIN,
         ]);
 
         // Teacher
-        $teacher = User::factory()->create([
+        $teacher_user = User::factory()->create([
             'role' => User::TEACHER,
         ]);
 
-        \App\Models\Teacher::factory()->create([
-            'user_id' => $teacher->id,
+        $teacher = \App\Models\Teacher::factory()->create([
+            'user_id' => $teacher_user->id,
+        ]);
+
+        // Course
+        $course = \App\Models\Course::factory()->create([
+            'teacher_id' => $teacher->id,
         ]);
 
         // Student
-        $student = User::factory()->create([
+        $student_user = User::factory()->create([
             'role' => User::STUDENT,
         ]);
 
         \App\Models\Student::factory()->create([
-            'user_id' => $teacher->id,
+            'user_id' => $student_user->id,
         ]);
-
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 
@@ -17,8 +18,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('welcome', ['menu' => 'home']);
+})->name('home');
 
 Route::controller(TeacherController::class)->prefix('teachers')->name('teacher.')->group(function () {
     Route::get('/', 'index')->name('index');
@@ -38,4 +39,14 @@ Route::controller(StudentController::class)->prefix('students')->name('student.'
     Route::get('/{student}/edit', 'edit')->name('edit');
     Route::post('/{student}/update', 'update')->name('update');
     Route::delete('/{student}/delete', 'destroy')->name('delete');
+});
+
+Route::controller(CourseController::class)->prefix('courses')->name('course.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/{course}', 'show')->name('show');
+    Route::get('/{course}/edit', 'edit')->name('edit');
+    Route::post('/{course}/update', 'update')->name('update');
+    Route::delete('/{course}/delete', 'destroy')->name('delete');
 });

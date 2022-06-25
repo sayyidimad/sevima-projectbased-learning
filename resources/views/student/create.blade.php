@@ -1,15 +1,15 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    @include('partials._breadcrumb', ['firstText' => 'Guru /', 'secondText' => 'Edit Guru'])
+    @include('partials._breadcrumb', ['firstText' => 'Siswa /', 'secondText' => 'Tambahkan Siswa'])
 
     <div class="row">
         <div class="col-xl-6 offset-xl-3">
-            <form action="{{ route('teacher.update', $teacher) }}" method="post">
+            <form action="{{ route('student.store') }}" method="post">
                 @csrf
                 <div class="card mb-4">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">Guru</h5>
+                        <h5 class="mb-0">Siswa</h5>
                     </div>
                     <div class="card-body">
                         <div class="mb-3">
@@ -17,7 +17,7 @@
                             <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-fullname2" class="input-group-text"><i
                                         class="bx bx-user"></i></span>
-                                <input type="text" class="form-control" name="name" value="{{ $teacher->name }}"
+                                <input type="text" class="form-control" name="name" value="{{ old('name') }}"
                                     id="basic-icon-default-fullname" />
                             </div>
 
@@ -31,7 +31,7 @@
                                 <span id="basic-icon-default-birth-date" class="input-group-text"><i
                                         class='bx bxs-calendar'></i></span>
                                 <input type="date" class="form-control" name="birth_date"
-                                    value="{{ $teacher->birth_date }}" id="basic-icon-default-birth-date" />
+                                    value="{{ old('birth_date') }}" id="basic-icon-default-birth-date" />
                             </div>
 
                             @error('birth_date')
@@ -43,7 +43,7 @@
                             <div class="input-group input-group-merge">
                                 <span class="input-group-text"><i class="bx bx-envelope"></i></span>
                                 <input type="email" id="basic-icon-default-email" class="form-control" name="email"
-                                    value="{{ $teacher->user->email }}" />
+                                    value="{{ old('email') }}" />
                             </div>
 
                             @error('email')
@@ -55,7 +55,7 @@
                             <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-password" class="input-group-text"><i
                                         class='bx bx-key'></i></span>
-                                <input type="password" class="form-control" name="password"
+                                <input type="password" class="form-control" name="password" value="{{ old('password') }}"
                                     id="basic-icon-default-password" />
                             </div>
 
@@ -70,6 +70,7 @@
                                 <span id="basic-icon-default-password-confirmation" class="input-group-text"><i
                                         class='bx bx-key'></i></span>
                                 <input type="password" class="form-control" name="password_confirmation"
+                                    value="{{ old('password_confirmation') }}"
                                     id="basic-icon-default-password-confirmation" />
                             </div>
 
@@ -79,7 +80,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Update</button>
+                <button type="submit" class="btn btn-primary">Tambahkan</button>
             </form>
         </div>
     </div>

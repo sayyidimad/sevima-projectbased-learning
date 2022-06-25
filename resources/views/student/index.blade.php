@@ -1,16 +1,16 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Guru')
+@section('title', 'Siswa')
 
 @section('content')
-    @include('partials._breadcrumb', ['secondText' => 'Guru'])
+    @include('partials._breadcrumb', ['secondText' => 'Siswa'])
 
     {{-- <button type="button" class="btn btn-primary">Primary</button> --}}
-    <a href="{{ route('teacher.create') }}" class="btn btn-primary mb-3"><i class='bx bx-plus'></i> Tambahkan</a>
+    <a href="{{ route('student.create') }}" class="btn btn-primary mb-3"><i class='bx bx-plus'></i> Tambahkan</a>
 
     <!-- Hoverable Table rows -->
     <div class="card">
-        <h5 class="card-header">Guru</h5>
+        <h5 class="card-header">Siswa</h5>
         <div class="text-nowrap">
             <table class="table table-hover">
                 <thead>
@@ -23,15 +23,15 @@
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
-                    @foreach ($teachers as $teacher)
+                    @foreach ($students as $student)
                         <tr>
-                            <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{ $teacher->name }}</strong>
+                            <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{ $student->name }}</strong>
                             </td>
-                            <td>{{ $teacher->user->email }}</td>
-                            <td>{{ $teacher->birth_date }}</td>
-                            <td>{{ $teacher->join_date }}</td>
+                            <td>{{ $student->user->email }}</td>
+                            <td>{{ $student->birth_date }}</td>
+                            <td>{{ $student->join_date }}</td>
                             <td>
-                                <x-table-action :data="$teacher" :model="'teacher'" />
+                                <x-table-action :data="$student" :model="'student'" />
                             </td>
                         </tr>
                     @endforeach

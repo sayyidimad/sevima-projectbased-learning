@@ -17,7 +17,7 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        return view('teacher.index', ['teachers' => Teacher::all()]);
+        return view('teacher.index', ['menu' => 'teacher', 'teachers' => Teacher::all()]);
     }
 
     /**
@@ -27,7 +27,7 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        return view('teacher.create');
+        return view('teacher.create', ['menu' => 'teacher']);
     }
 
     /**
@@ -43,8 +43,9 @@ class TeacherController extends Controller
         $user = User::create($request->except('birth_date'));
 
         $request['join_date'] = now();
+        $request['last_login'] = now();
         $request['user_id'] = $user->id;
-        $teacher = Teacher::create($request->only(['name', 'birth_date', 'join_date', 'user_id']));
+        $teacher = Teacher::create($request->only(['name', 'birth_date', 'join_date', 'last_login', 'user_id']));
 
         return redirect()->route('teacher.index')->withSuccess('Guru berhasil ditambahkan');
     }
@@ -68,7 +69,7 @@ class TeacherController extends Controller
      */
     public function edit(Teacher $teacher)
     {
-        return view('teacher.edit', ['teacher' => $teacher]);
+        return view('teacher.edit', ['menu' => 'teacher', 'teacher' => $teacher]);
     }
 
     /**

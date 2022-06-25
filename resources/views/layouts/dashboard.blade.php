@@ -70,7 +70,7 @@
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
 
-        <x-menu />
+        <x-menu :menu="$menu" />
 
         <!-- Layout container -->
         <div class="layout-page">

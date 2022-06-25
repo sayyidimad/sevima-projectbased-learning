@@ -1,15 +1,15 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    @include('partials._breadcrumb', ['firstText' => 'Guru /', 'secondText' => 'Edit Guru'])
+    @include('partials._breadcrumb', ['firstText' => 'Siswa /', 'secondText' => 'Edit Siswa'])
 
     <div class="row">
         <div class="col-xl-6 offset-xl-3">
-            <form action="{{ route('teacher.update', $teacher) }}" method="post">
+            <form action="{{ route('student.update', $student) }}" method="post">
                 @csrf
                 <div class="card mb-4">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">Guru</h5>
+                        <h5 class="mb-0">Siswa</h5>
                     </div>
                     <div class="card-body">
                         <div class="mb-3">
@@ -17,7 +17,7 @@
                             <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-fullname2" class="input-group-text"><i
                                         class="bx bx-user"></i></span>
-                                <input type="text" class="form-control" name="name" value="{{ $teacher->name }}"
+                                <input type="text" class="form-control" name="name" value="{{ $student->name }}"
                                     id="basic-icon-default-fullname" />
                             </div>
 
@@ -31,7 +31,7 @@
                                 <span id="basic-icon-default-birth-date" class="input-group-text"><i
                                         class='bx bxs-calendar'></i></span>
                                 <input type="date" class="form-control" name="birth_date"
-                                    value="{{ $teacher->birth_date }}" id="basic-icon-default-birth-date" />
+                                    value="{{ $student->birth_date }}" id="basic-icon-default-birth-date" />
                             </div>
 
                             @error('birth_date')
@@ -43,7 +43,7 @@
                             <div class="input-group input-group-merge">
                                 <span class="input-group-text"><i class="bx bx-envelope"></i></span>
                                 <input type="email" id="basic-icon-default-email" class="form-control" name="email"
-                                    value="{{ $teacher->user->email }}" />
+                                    value="{{ $student->user->email }}" />
                             </div>
 
                             @error('email')
