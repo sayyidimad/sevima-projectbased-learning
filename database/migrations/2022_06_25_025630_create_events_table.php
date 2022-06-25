@@ -16,11 +16,9 @@ return new class extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->foreignId('course_id')->constrained()->onDelete('cascade');
-            $table->string('video')->nullable();
-            $table->string('material')->nullable();
-            $table->json('questions')->nullable();
             $table->string('name');
-            $table->string('type');
+            $table->string('video');
+            $table->string('assignment');
             $table->timestamps();
         });
     }

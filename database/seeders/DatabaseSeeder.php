@@ -41,8 +41,8 @@ class DatabaseSeeder extends Seeder
         // Event
         $event = Event::factory()->create([
             'course_id' => $course->id,
-            'type' => Event::VIDEO,
             'video' => 'https://www.youtube.com/watch?v=ImtZ5yENzgE',
+            'assignment' => 'Buat laporan mengenai Laravel!',
         ]);
 
         // Student

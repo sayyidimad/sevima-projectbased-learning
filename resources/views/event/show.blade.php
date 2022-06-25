@@ -15,7 +15,7 @@
                 <thead>
                     <tr>
                         <th>Nama</th>
-                        <th>Tanggal dibuat</th>
+                        <th>Tipe</th>
                         <th>Tanggal diperbarui</th>
                         <th>Actions</th>
                     </tr>
@@ -23,9 +23,10 @@
                 <tbody class="table-border-bottom-0">
                     @foreach ($course->events as $event)
                         <tr>
-                            <td><i class="fab fa-angular fa-lg text-danger"></i><strong>{{ $event->name }}</strong>
+                            <td>{{ $event->name }}</td>
+                            <td><i class="fab fa-angular fa-lg text-danger"></i>
+                                <strong>{{ $event->type }}</strong>
                             </td>
-                            <td>{{ $event->created_at }}</td>
                             <td>{{ $event->updated_at }}</td>
                             <td>
                                 <div class="dropdown">

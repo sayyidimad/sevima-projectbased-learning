@@ -52,7 +52,7 @@ Route::controller(CourseController::class)->prefix('courses')->name('course.')->
     Route::delete('/{course}/delete', 'destroy')->name('delete');
 });
 
-Route::controller(EventController::class)->prefix('events/{course}')->name('event.')->group(function () {
+Route::controller(EventController::class)->prefix('courses/{course}/events')->name('event.')->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/create', 'create')->name('create');
     Route::post('/store', 'store')->name('store');

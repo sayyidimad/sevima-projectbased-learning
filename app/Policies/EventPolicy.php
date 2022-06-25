@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Course;
+use App\Models\Event;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class CoursePolicy
+class EventPolicy
 {
     use HandlesAuthorization;
 
@@ -25,12 +25,12 @@ class CoursePolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Course  $course
+     * @param  \App\Models\Event  $event
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Course $course)
+    public function view(User $user, Event $event)
     {
-        return ($user->id == $course->teacher_id) || $user->role == User::ADMIN;
+        return ($user->id == $event->course->teacher_id) || $user->role == User::ADMIN;
     }
 
     /**
@@ -48,47 +48,47 @@ class CoursePolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Course  $course
+     * @param  \App\Models\Event  $event
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Course $course)
+    public function update(User $user, Event $event)
     {
-        return ($user->id == $course->teacher_id) || $user->role == User::ADMIN;
+        return ($user->id == $event->course->teacher_id) || $user->role == User::ADMIN;
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Course  $course
+     * @param  \App\Models\Event  $event
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Course $course)
+    public function delete(User $user, Event $event)
     {
-        return ($user->id == $course->teacher_id) || $user->role == User::ADMIN;
+        return ($user->id == $event->course->teacher_id) || $user->role == User::ADMIN;
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Course  $course
+     * @param  \App\Models\Event  $event
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Course $course)
+    public function restore(User $user, Event $event)
     {
-        return ($user->id == $course->teacher_id) || $user->role == User::ADMIN;
+        return ($user->id == $event->course->teacher_id) || $user->role == User::ADMIN;
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Course  $course
+     * @param  \App\Models\Event  $event
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Course $course)
+    public function forceDelete(User $user, Event $event)
     {
-        return ($user->id == $course->teacher_id) || $user->role == User::ADMIN;
+        return ($user->id == $event->course->teacher_id) || $user->role == User::ADMIN;
     }
 }
