@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\StudentController;
@@ -18,46 +19,54 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome', ['menu' => 'home']);
-})->name('home');
+Route::middleware(['auth'])->prefix('dashboard')->group(function () {
+    Route::get('/', function () {
+        return view('welcome', ['menu' => 'home']);
+    })->middleware('auth')->name('home');
 
-Route::controller(TeacherController::class)->prefix('teachers')->name('teacher.')->group(function () {
-    Route::get('/', 'index')->name('index');
-    Route::get('/create', 'create')->name('create');
-    Route::post('/store', 'store')->name('store');
-    Route::get('/{teacher}', 'show')->name('show');
-    Route::get('/{teacher}/edit', 'edit')->name('edit');
-    Route::post('/{teacher}/update', 'update')->name('update');
-    Route::delete('/{teacher}/delete', 'destroy')->name('delete');
+    Route::controller(TeacherController::class)->prefix('teachers')->name('teacher.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/{teacher}', 'show')->name('show');
+        Route::get('/{teacher}/edit', 'edit')->name('edit');
+        Route::post('/{teacher}/update', 'update')->name('update');
+        Route::delete('/{teacher}/delete', 'destroy')->name('delete');
+    });
+
+    Route::controller(StudentController::class)->prefix('students')->name('student.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/{student}', 'show')->name('show');
+        Route::get('/{student}/edit', 'edit')->name('edit');
+        Route::post('/{student}/update', 'update')->name('update');
+        Route::delete('/{student}/delete', 'destroy')->name('delete');
+    });
+
+    Route::controller(CourseController::class)->prefix('courses')->name('course.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/{course}', 'show')->name('show');
+        Route::get('/{course}/edit', 'edit')->name('edit');
+        Route::post('/{course}/update', 'update')->name('update');
+        Route::delete('/{course}/delete', 'destroy')->name('delete');
+    });
+
+    Route::controller(EventController::class)->prefix('courses/{course}/events')->name('event.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/{event}', 'show')->name('show');
+        Route::get('/{event}/edit', 'edit')->name('edit');
+        Route::post('/{event}/update', 'update')->name('update');
+        Route::delete('/{event}/delete', 'destroy')->name('delete');
+    });
 });
 
-Route::controller(StudentController::class)->prefix('students')->name('student.')->group(function () {
-    Route::get('/', 'index')->name('index');
-    Route::get('/create', 'create')->name('create');
-    Route::post('/store', 'store')->name('store');
-    Route::get('/{student}', 'show')->name('show');
-    Route::get('/{student}/edit', 'edit')->name('edit');
-    Route::post('/{student}/update', 'update')->name('update');
-    Route::delete('/{student}/delete', 'destroy')->name('delete');
-});
-
-Route::controller(CourseController::class)->prefix('courses')->name('course.')->group(function () {
-    Route::get('/', 'index')->name('index');
-    Route::get('/create', 'create')->name('create');
-    Route::post('/store', 'store')->name('store');
-    Route::get('/{course}', 'show')->name('show');
-    Route::get('/{course}/edit', 'edit')->name('edit');
-    Route::post('/{course}/update', 'update')->name('update');
-    Route::delete('/{course}/delete', 'destroy')->name('delete');
-});
-
-Route::controller(EventController::class)->prefix('courses/{course}/events')->name('event.')->group(function () {
-    Route::get('/', 'index')->name('index');
-    Route::get('/create', 'create')->name('create');
-    Route::post('/store', 'store')->name('store');
-    Route::get('/{event}', 'show')->name('show');
-    Route::get('/{event}/edit', 'edit')->name('edit');
-    Route::post('/{event}/update', 'update')->name('update');
-    Route::delete('/{event}/delete', 'destroy')->name('delete');
-});
+Route::get('/register', [AuthController::class, 'register'])->middleware(['guest'])->name('register');
+Route::get('/login', [AuthController::class, 'loginForm'])->middleware(['guest'])->name('login.form');
+Route::post('/register/store', [AuthController::class, 'registerStore'])->middleware(['guest'])->name('register.store');
+Route::post('/login', [AuthController::class, 'login'])->middleware(['guest'])->name('login');
+Route::post('/logout', [AuthController::class, 'logout'])->middleware(['auth'])->name('logout');

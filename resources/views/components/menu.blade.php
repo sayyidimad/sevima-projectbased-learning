@@ -67,64 +67,30 @@
             </a>
         </li>
 
-        <!-- Layouts -->
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-layout"></i>
-                <div data-i18n="Layouts">Layouts</div>
-            </a>
-
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="layouts-without-menu.html" class="menu-link">
-                        <div data-i18n="Without menu">Without menu</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="layouts-without-navbar.html" class="menu-link">
-                        <div data-i18n="Without navbar">Without navbar</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="layouts-container.html" class="menu-link">
-                        <div data-i18n="Container">Container</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="layouts-fluid.html" class="menu-link">
-                        <div data-i18n="Fluid">Fluid</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="layouts-blank.html" class="menu-link">
-                        <div data-i18n="Blank">Blank</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
-
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Account</span>
         </li>
-        <li class="menu-item {{ in_array($menu, ['teacher', 'student']) ? 'open' : ''  }}">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                <div data-i18n="Account Settings">Account Settings</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item {{ $menu == 'teacher' ? 'active' : ''  }}">
-                    <a href="{{ route('teacher.index') }}" class="menu-link">
-                        <div data-i18n="Account">Guru</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ $menu == 'student' ? 'active' : ''  }}">
-                    <a href="{{ route('student.index') }}" class="menu-link">
-                        <div data-i18n="Notifications">Siswa</div>
-                    </a>
-                </li>
-                </li>
-            </ul>
-        </li>
+        @if (auth()->user()->role == 'admin')
+            <li class="menu-item {{ in_array($menu, ['teacher', 'student']) ? 'open' : ''  }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                    <div data-i18n="Account Settings">Account Settings</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item {{ $menu == 'teacher' ? 'active' : ''  }}">
+                        <a href="{{ route('teacher.index') }}" class="menu-link">
+                            <div data-i18n="Account">Guru</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ $menu == 'student' ? 'active' : ''  }}">
+                        <a href="{{ route('student.index') }}" class="menu-link">
+                            <div data-i18n="Notifications">Siswa</div>
+                        </a>
+                    </li>
+                    </li>
+                </ul>
+            </li>
+        @endif
         <!-- Cards -->
         <li class="menu-item {{ $menu == 'course' ? 'active' : ''  }}">
             <a href="{{ route('course.index') }}" class="menu-link">
@@ -132,6 +98,8 @@
                 <div data-i18n="Basic">Pelajaran</div>
             </a>
         </li>
+        {{ auth()->user()->name }}
+        {{ auth()->user()->role }}
     </ul>
 </aside>
 <!-- / Menu -->
