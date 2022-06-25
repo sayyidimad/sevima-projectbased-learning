@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CourseController;
-use App\Http\Controllers\EventController;
-use App\Http\Controllers\StudentController;
-use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\Dashboard\CourseController;
+use App\Http\Controllers\Dashboard\EventController;
+use App\Http\Controllers\Dashboard\StudentController;
+use App\Http\Controllers\Dashboard\TeacherController;
 
 use Illuminate\Support\Facades\Route;
 

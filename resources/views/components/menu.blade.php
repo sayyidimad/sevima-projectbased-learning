@@ -63,18 +63,18 @@
         <li class="menu-item {{ $menu == 'home' ? 'active' : ''  }}">
             <a href="{{ route('home') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Dashboard</div>
+                <div data-i18n="Analytics">Home</div>
             </a>
         </li>
 
         <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Account</span>
+            <span class="menu-header-text">Akun</span>
         </li>
         @if (auth()->user()->role == 'admin')
             <li class="menu-item {{ in_array($menu, ['teacher', 'student']) ? 'open' : ''  }}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                    <div data-i18n="Account Settings">Account Settings</div>
+                    <div data-i18n="Account Settings">Akun</div>
                 </a>
                 <ul class="menu-sub">
                     <li class="menu-item {{ $menu == 'teacher' ? 'active' : ''  }}">
@@ -98,8 +98,6 @@
                 <div data-i18n="Basic">Pelajaran</div>
             </a>
         </li>
-        {{ auth()->user()->name }}
-        {{ auth()->user()->role }}
     </ul>
 </aside>
 <!-- / Menu -->
