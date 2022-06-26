@@ -31,7 +31,7 @@ class EventController extends Controller
     {
         $view = request('view');
 
-        return view(('event.create'), ['menu' => 'course', 'course' => $course]);
+        return view('dashboard.event.create', ['menu' => 'course', 'course' => $course]);
     }
 
     /**
